@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.mask
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
@@ -18,6 +19,8 @@
 //= require bootstrap
 
 function ready(event) {
+  $('#cep').mask('00000-000');
+  $('#freight_price').mask('000.000.000.000.000,00', {reverse: true});
   $("#simple_search_field").focus();
   $('input[type=radio][name=searchRadio]').change(function() {
     if (this.value === 'simple') {
@@ -52,7 +55,7 @@ function ready(event) {
         $("#neighborhood").val(data.neighborhood)
         $("#city").val(data.city)
         $("#state").val(data.state)
-        $("#freight_price").val(data.freight_cost)
+        $("#freight_price").val(data.freight_cost.toFixed(2)).trigger('input');
         $("#zipcode_notfound_msg").hide();
       },
       error: function(jqXHR, textStatus, errorThrown){
@@ -60,10 +63,13 @@ function ready(event) {
         $("#neighborhood").val("")
         $("#city").val("")
         $("#state").val("")
-        $("#freight_price").val("")
+        $("#freight_price").val("0,00")
         $("#zipcode_notfound_msg").show();
       }
-    })
+    });
+  });
+  $( '#freightModal' ).on("hidden.bs.modal", function(){
+    $("#freight_price").val("0,00")
   });
 }
 

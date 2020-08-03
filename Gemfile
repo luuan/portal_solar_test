@@ -17,9 +17,9 @@ end
 gem 'uglifier', '>= 1.3.0'
 gem "roo", "~> 2.8.0"
 gem 'bootstrap'
-gem 'geocoder', '~> 1.3', '>= 1.3.7'
 gem 'kaminari'
 gem 'correios-cep'
+gem 'jquery_mask_rails', '~> 0.1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
