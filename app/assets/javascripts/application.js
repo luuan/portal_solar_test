@@ -20,7 +20,11 @@
 
 function ready(event) {
   $('#cep').mask('00000-000');
+  $('#postal_code').mask('00000-000');
   $('#freight_price').mask('000.000.000.000.000,00', {reverse: true});
+  $('#cubed_weight').mask('000.000.000.000.000,00', {reverse: true});
+  $('#wish_price').mask('000.000.000.000.000,00', {reverse: true});
+  $('#income').mask('000.000.000.000.000,00', {reverse: true});
   $("#simple_search_field").focus();
   $('input[type=radio][name=searchRadio]').change(function() {
     if (this.value === 'simple') {
@@ -56,6 +60,7 @@ function ready(event) {
         $("#city").val(data.city)
         $("#state").val(data.state)
         $("#freight_price").val(data.freight_cost.toFixed(2)).trigger('input');
+        $("#cubed_weight").val(data.cubed_weight.toFixed(2)).trigger('input');
         $("#zipcode_notfound_msg").hide();
       },
       error: function(jqXHR, textStatus, errorThrown){
@@ -64,12 +69,14 @@ function ready(event) {
         $("#city").val("")
         $("#state").val("")
         $("#freight_price").val("0,00")
+        $("#cubed_weight").val("0,00")
         $("#zipcode_notfound_msg").show();
       }
     });
   });
   $( '#freightModal' ).on("hidden.bs.modal", function(){
     $("#freight_price").val("0,00")
+    $("#cubed_weight").val("0,00")
   });
 }
 

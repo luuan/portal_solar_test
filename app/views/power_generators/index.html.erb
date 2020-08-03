@@ -1,64 +1,95 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="/"><%= image_tag 'ps_logo.png', class: "logo" %></a>
+    <a class="navbar-brand" href="/"><%= image_tag 'ps_logo.png', class: "logo" %></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="row">
-        <div class="col-md-12">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="searchRadio" id="simple_search" value="simple">
-                <label class="form-check-label" for="simple_search">Busca Simples</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="searchRadio" id="advanced_search" value="advanced">
-                <label class="form-check-label" for="advanced_search">Busca Avançada</label>
-              </div>
-            </li>
-          </ul>
+        <div class="col-md-6">
+          <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="searchRadio" id="simple_search" value="simple" checked> Busca Simples
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="searchRadio" id="advanced_search" value="advanced"> Busca Avançada
+            </label>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <%= form_tag root_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-              <div class="simple-form">
-                <input id="simple_search_field" class="form-control mr-sm-2 simple_search" type="search" name="keyword" placeholder="o que procura?" aria-label="Search" checked="true">
-              </div>
-              
-              <div class="advanced-form" style="display:none;">
-                 <input id="income" class="form-control mr-sm-2 advanced_field" type="search" name="income" placeholder="renda mensal" aria-label="Search">
-                 <input id="postal_code" class="form-control mr-sm-2 advanced_field" type="search" name="postal_code" placeholder="CEP" aria-label="Search">
-              </div>
-              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar </button>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </nav>
-    <div class="row">
-      <div class="col mt-3">
-        <%= paginate @power_generators %>
-      </div>
-    </div>
-  <%if @power_generators.blank?%>
-    Não foram encontrados registros, por favor, pesquise um nome válido ou use o botão "Início" para exibir todos.
-  <%else%>  
-    <div class="row row-cols-1 row-cols-md-4">
-      <% @power_generators.each do |power_generator| %>
-        <div class="col mb-4">
-          <div class="card">
-            <%= image_tag power_generator.image_url, class: 'card-img-top card_img' %>
-            <div class="card-body">
-              <h2><%= power_generator.name %></h2>
-              <p class="card-title card_price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, separator: ",", delimiter: ".", class: "card_price") %></p>
-              <button type="button" class="card-link btn btn-outline-success modal_btn" data-toggle="modal" data-target="#freightModal" data-whatever="">Consultar as melhores condições de Entrega</button>
-              <p class="card-text"><strong>Descrição: </strong><%= power_generator.description %></p>
-              <input type="hidden" class="pg_id" name="id" value="<%= power_generator.id %>">
+      <%= form_tag root_path, method: "get", class: "form-inline" do %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="simple-form">
+              <input id="simple_search_field" class="form-control simple_search" type="search" name="keyword" placeholder="o que procura?" aria-label="Search" checked="true">
             </div>
+          </div>
+          <div class="col-md-12">  
+            <div class="advanced-form" style="display:none;">
+              <div class="row">
+                <div class="col">
+                  <input id="income" class="form-control advanced_field" type="search" name="income" placeholder="renda mensal" aria-label="Search">
+                </div>
+                <div class="col">
+                  <input id="postal_code" class="form-control advanced_field" type="search" name="postal_code" placeholder="CEP" aria-label="Search">
+                </div>
+                <div class="col">
+                  <input id="wish_price" class="form-control advanced_field" type="search" name="wish_price" placeholder="Preço Desejado Aproximado" aria-label="Search">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <select class="custom-select advanced_field" id="performance" name="performance">
+                    <option selected>Eficiência...</option>
+                    <option value="low">Baixa</option>
+                    <option value="medium">Média</option>
+                    <option value="high">Alta</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar </button>
           </div>
         </div>
       <% end %>
     </div>
-  <% end %>
+  </nav>
+  <div class="row">
+    <div class="col mt-3">
+      <%= paginate @power_generators %>
+    </div>
+    <div class="col mt-3">
+      <select class="custom-select mr-sm-2" id="filter">
+        <option selected>Filtrar...</option>
+        <option value="price">Preço</option>
+        <option value="name">Nome</option>
+        <option value="KWP">KWP</option>
+      </select>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-4">
+    <% @power_generators.each do |power_generator| %>
+      <div class="col mb-4">
+        <div class="card">
+          <div class="card-header">
+            <%= image_tag power_generator.image_url, class: 'card-img-top card_img' %>
+          </div>
+          <div class="card-body">
+            <h2><%= power_generator.name %></h2>
+            <p class="card-title card_price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, separator: ",", delimiter: ".", class: "card_price") %></p>
+            <button type="button" class="card-link btn btn-outline-success modal_btn" data-toggle="modal" data-target="#freightModal" data-whatever="">Consultar as melhores condições de Entrega</button>
+            <div class="card-footer">
+              <p class="card-text"><strong>Descrição: </strong><%= power_generator.description %></p>
+            </div>
+            <input type="hidden" class="pg_id" name="id" value="<%= power_generator.id %>">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <%= render "power_generators/modal" %>
 </div>

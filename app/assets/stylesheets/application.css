@@ -105,6 +105,10 @@
 }
  */
 
+.card {
+  height: 53em;
+}
+
 .logo {
   width: 286px;
   height: 110px;
