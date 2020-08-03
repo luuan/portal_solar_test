@@ -13,23 +13,6 @@
  *= require_tree .
  *= require_self
  */
-/* 
-
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 180px;
-  
-}
-
-.header__title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 60px;
-  color: #000;
-  text-align: center;
-  margin-left: 46%;
-}
 
 .gradient {
   background: #e96443;
@@ -43,75 +26,8 @@
   align-items: center;
 }
 
-.btn_submit{
-  
-}
-
-.searcher__radio {
-  display: flex;
-  justify-content: space-between;
-  width: 340px;
-  margin-left: 20px;
-}
-
-.simple-form {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-}
-
-.simple-form__input {
-  width: 200px;
-  margin-left: 100px;
-}
-
-.simple-form__btn {
-  margin-left: -60px;
-}
-
-.advanced-form {
-  margin-top: 22px;
-  margin-bottom: 20px;
-  margin-left: 100px;
-}
-
-.power_generators-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.power_generator-card {
-  height: 200px;
-  width: 720px;
-  display: flex;
-  flex-direction: row;
-  margin-left: -60px;
-}
-
-.power_generator-card__img {
-  width: 220px;
-  height: 220px;
-  border-radius: 0.25em;
-}
-
-.power_generator-card__body {
-  margin-left: 26px;
-  margin-right: 130px;
-}
-
-.power_generator-card__button {
-  color: #e96443;
-}
- */
-
 .card {
   height: 53em;
-}
-
-.logo {
-  width: 286px;
-  height: 110px;
 }
 
 .card_img {

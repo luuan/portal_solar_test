@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :power_generators do
     collection do
       get 'get_freight'
+      get 'filter'
     end
   end
 end

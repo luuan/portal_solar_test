@@ -1,5 +1,5 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light searcher gradient">
     <a class="navbar-brand" href="/"><%= image_tag 'ps_logo.png', class: "logo" %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Buscar </button>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar </button>
           </div>
         </div>
       <% end %>
@@ -63,12 +63,16 @@
       <%= paginate @power_generators %>
     </div>
     <div class="col mt-3">
-      <select class="custom-select mr-sm-2" id="filter">
-        <option selected>Filtrar...</option>
-        <option value="price">Preço</option>
-        <option value="name">Nome</option>
-        <option value="KWP">KWP</option>
-      </select>
+      <%= form_tag filter_power_generators_path, method: "get", class: "form-inline" do %>
+        <select class="custom-select mr-sm-2" id="filter" name="filter">
+          <option selected>Ordenar Por...</option>
+          <option value="price">Preço</option>
+          <option value="name">Nome</option>
+          <option value="kwp">KWP</option>
+        </select>
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ordenar </button>
+      <% end %>
     </div>
   </div>
   <div class="row row-cols-1 row-cols-md-4">

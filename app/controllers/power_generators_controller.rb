@@ -6,9 +6,24 @@ class PowerGeneratorsController < ApplicationController
     unless params["keyword"].blank?
       @power_generators = @power_generators.where("name LIKE ?", "%" + @keyword.parameterize.upcase + "%").order(name: :asc).page params[:page]
     end
-    unless params["income"].blank? && params["postal_code"].blank? && params["wish_price"].blank? && params["performance"].blank?
-      @power_generators = product_recommendation
+
+    # unless params["income"].blank? && params["postal_code"].blank? && params["wish_price"].blank? && params["performance"].blank?
+    #   product_recommendation
+    # end
+  end
+
+  def filter
+    if params["filter"] == "price"
+      @power_generators = PowerGenerator.order(price: :asc).page params[:page]
+    elsif params["filter"] == "name"
+      @power_generators = PowerGenerator.order(name: :asc).page params[:page]
+    elsif params["filter"] == "kwp"
+      @power_generators = PowerGenerator.order(kwp: :asc).page params[:page]
+    else
+      @power_generators = PowerGenerator.order(name: :asc).page params[:page]
     end
+
+    render :index
   end
 
   def get_freight
@@ -26,19 +41,18 @@ class PowerGeneratorsController < ApplicationController
     respond_to do |format|
       format.json {render json: address}
     end
-
   end
 
   private
     def product_recommendation
-      unless params["postal_code"].blank?
-        address = Correios::CEP::AddressFinder.new.get(params["postal_code"])
-      end
-      weight = PowerGenerator.where(id: params["pg_id"]).first
+      # unless params["postal_code"].blank?
+      #   address = Correios::CEP::AddressFinder.new.get(params["postal_code"])
+      # end
+      # weight = PowerGenerator.where(id: params["pg_id"]).first
 
-      params["income"]
-      params["wish_price"]
-      params["performance"]
+      # params["income"]
+      # params["wish_price"]
+      # params["performance"]
     end
 
     def create_cubed_weight pg_data
