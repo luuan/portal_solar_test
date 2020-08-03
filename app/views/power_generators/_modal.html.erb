@@ -1,0 +1,54 @@
+<!-- Modal -->
+<div class="modal fade" id="freightModal" tabindex="-1" role="dialog" aria-labelledby="freightModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="freightModalLabel">Calculo de Frete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="cep">CEP</label>
+              <input type="text" class="form-control" id="cep" name="postal_code">
+            </div>
+             <div class="form-group col-md-6">
+              <p><strong id="zipcode_notfound_msg" style="display:none;color: red;">Endereço não encontrado, tente outro CEP</strong></p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="street">Rua</label>
+              <input type="text" class="form-control" id="street" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="neighborhood">Bairro</label>
+              <input type="text" class="form-control" id="neighborhood" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+              <label for="city">Cidade</label>
+              <input type="text" class="form-control" id="city" readonly>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="state">Estado</label>
+              <input type="text" class="form-control" id="state" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="state">Preço do frete</label>
+              <input type="text" class="form-control" id="freight_price" readonly>
+            </div>
+          </div>
+          <input type="hidden" id="pg_id_send" name="pg_id">
+      </div>
+      <div class="modal-footer">
+          <button id="calc_freight_btn" class="btn btn-outline-success">Calcular Frete</button>
+      </div>
+    </div>
+  </div>
+</div>
