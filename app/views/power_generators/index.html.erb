@@ -76,23 +76,27 @@
     </div>
   </div>
   <div class="row row-cols-1 row-cols-md-4">
-    <% @power_generators.each do |power_generator| %>
-      <div class="col mb-4">
-        <div class="card">
-          <div class="card-header">
-            <%= image_tag power_generator.image_url, class: 'card-img-top card_img' %>
-          </div>
-          <div class="card-body">
-            <h2><%= power_generator.name %></h2>
-            <p class="card-title card_price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, separator: ",", delimiter: ".", class: "card_price") %></p>
-            <button type="button" class="card-link btn btn-outline-success modal_btn" data-toggle="modal" data-target="#freightModal" data-whatever="">Consultar as melhores condições de Entrega</button>
-            <div class="card-footer">
-              <p class="card-text"><strong>Descrição: </strong><%= power_generator.description %></p>
+    <%if @power_generators.blank? %>
+      Não Encontramos registros com esse nome. Por favor, busque um nome válido.
+    <%else%>
+      <% @power_generators.each do |power_generator| %>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-header">
+              <%= image_tag power_generator.image_url, class: 'card-img-top card_img' %>
             </div>
-            <input type="hidden" class="pg_id" name="id" value="<%= power_generator.id %>">
+            <div class="card-body">
+              <h2><%= power_generator.name %></h2>
+              <p class="card-title card_price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, separator: ",", delimiter: ".", class: "card_price") %></p>
+              <button type="button" class="card-link btn btn-outline-success modal_btn" data-toggle="modal" data-target="#freightModal" data-whatever="">Consultar as melhores condições de Entrega</button>
+              <div class="card-footer">
+                <p class="card-text"><strong>Descrição: </strong><%= power_generator.description %></p>
+              </div>
+              <input type="hidden" class="pg_id" name="id" value="<%= power_generator.id %>">
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <%= render "power_generators/modal" %>
